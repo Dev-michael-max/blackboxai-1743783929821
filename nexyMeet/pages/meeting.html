@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexyMeet - Meeting Room</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .video-container {
+            aspect-ratio: 16/9;
+            background-color: #1a202c;
+        }
+        .participant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        .transcript-container {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="flex flex-col h-screen">
+        <!-- Main Content Area -->
+        <div class="flex flex-1 overflow-hidden">
+            <!-- Video Grid -->
+            <div class="flex-1 p-4 overflow-y-auto">
+                <div class="participant-grid">
+                    <!-- Local Video -->
+                    <div class="video-container rounded-lg overflow-hidden relative">
+                        <video id="local-video" autoplay muted class="w-full h-full object-cover"></video>
+                        <div class="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white px-2 py-1 rounded text-sm">
+                            You <i class="fas fa-microphone ml-1"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Remote Participants (sample) -->
+                    <div class="video-container rounded-lg overflow-hidden relative">
+                        <video class="w-full h-full object-cover" style="background-color: #2d3748;"></video>
+                        <div class="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white px-2 py-1 rounded text-sm">
+                            Sarah <i class="fas fa-microphone ml-1"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="w-80 bg-white border-l flex flex-col">
+                <!-- Meeting Info -->
+                <div class="p-4 border-b">
+                    <h2 class="font-bold text-lg">Team Standup</h2>
+                    <p class="text-sm text-gray-600">Meeting ID: 123-456-789</p>
+                    <div class="flex items-center mt-2">
+                        <span class="inline-block w-3 h-3 rounded-full bg-green-500 mr-2"></span>
+                        <span class="text-sm">3 participants</span>
+                    </div>
+                </div>
+
+                <!-- Chat Panel -->
+                <div class="flex-1 overflow-y-auto p-4 border-b">
+                    <h3 class="font-medium mb-2 flex items-center">
+                        <i class="fas fa-comments mr-2"></i> Chat
+                    </h3>
+                    <div class="space-y-3 mb-4">
+                        <div class="flex">
+                            <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center mr-2">
+                                <i class="fas fa-user text-indigo-600"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium">Sarah</p>
+                                <p class="text-sm">Can everyone hear me okay?</p>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center mr-2">
+                                <i class="fas fa-user text-indigo-600"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium">You</p>
+                                <p class="text-sm">Yes, sounds good!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <input type="text" placeholder="Type a message" class="w-full border rounded px-3 py-2 text-sm">
+                        <div class="flex justify-between mt-2">
+                            <button class="text-gray-500 hover:text-gray-700">
+                                <i class="far fa-smile"></i>
+                            </button>
+                            <button class="text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-paperclip"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Transcript Panel -->
+                <div class="p-4 border-b">
+                    <h3 class="font-medium mb-2 flex items-center">
+                        <i class="fas fa-file-alt mr-2"></i> AI Transcript
+                    </h3>
+                    <div class="transcript-container text-sm space-y-2">
+                        <p><span class="font-medium">Sarah:</span> Can everyone hear me okay?</p>
+                        <p><span class="font-medium">You:</span> Yes, sounds good!</p>
+                        <p><span class="font-medium">John:</span> I'm having some audio issues</p>
+                    </div>
+                    <button class="mt-2 text-sm text-indigo-600 hover:text-indigo-800">
+                        <i class="fas fa-download mr-1"></i> Save Transcript
+                    </button>
+                </div>
+
+                <!-- Participants List -->
+                <div class="p-4">
+                    <h3 class="font-medium mb-2 flex items-center">
+                        <i class="fas fa-users mr-2"></i> Participants (3)
+                    </h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 rounded-full bg-indigo-100 flex items-center justify-center mr-2">
+                                <i class="fas fa-user text-indigo-600 text-xs"></i>
+                            </div>
+                            <span>You (Host)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 rounded-full bg-indigo-100 flex items-center justify-center mr-2">
+                                <i class="fas fa-user text-indigo-600 text-xs"></i>
+                            </div>
+                            <span>Sarah</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 rounded-full bg-indigo-100 flex items-center justify-center mr-2">
+                                <i class="fas fa-user text-indigo-600 text-xs"></i>
+                            </div>
+                            <span>John</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Control Bar -->
+        <div class="bg-white border-t p-3">
+            <div class="flex justify-center space-x-4">
+                <button class="p-2 rounded-full hover:bg-gray-100" title="Mute">
+                    <i class="fas fa-microphone text-xl"></i>
+                </button>
+                <button class="p-2 rounded-full hover:bg-gray-100" title="Video Off">
+                    <i class="fas fa-video text-xl"></i>
+                </button>
+                <button class="p-2 rounded-full hover:bg-gray-100" title="Share Screen">
+                    <i class="fas fa-desktop text-xl"></i>
+                </button>
+                <button class="p-2 rounded-full hover:bg-gray-100" title="Participants">
+                    <i class="fas fa-users text-xl"></i>
+                </button>
+                <button class="p-2 rounded-full hover:bg-gray-100" title="Chat">
+                    <i class="fas fa-comment text-xl"></i>
+                </button>
+                <button class="p-2 rounded-full hover:bg-gray-100" title="Record">
+                    <i class="fas fa-circle text-xl text-red-500"></i>
+                </button>
+                <button class="p-2 rounded-full bg-red-500 text-white hover:bg-red-600" title="Leave">
+                    <i class="fas fa-phone-alt text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize local video stream
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+            .then(stream => {
+                const localVideo = document.getElementById('local-video');
+                localVideo.srcObject = stream;
+            })
+            .catch(err => {
+                console.error('Error accessing media devices:', err);
+            });
+
+        // Simulated WebRTC functionality would go here
+    </script>
+</body>
+</html>
